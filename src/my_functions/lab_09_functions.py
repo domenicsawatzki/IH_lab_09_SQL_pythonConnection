@@ -21,3 +21,10 @@ def rental_count_month(df, month, year):
     grouped_df = grouped_df.reset_index()
     grouped_df.rename(columns={'rental_id':f'rentals_{month}_{year}'}, inplace = True)
     return grouped_df
+
+
+def compare_rentals(df1, df2):
+    merged_df = pd.merge(df1,df2, on='customer_id')
+    merged_df['difference'] = abs(merged_df.iloc[:, 2] - merged_df.iloc[:, 1])
+    
+    return merged_df
